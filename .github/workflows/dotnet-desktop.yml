@@ -72,11 +72,11 @@ jobs:
 
     # Execute all unit tests in the solution
     - name: Execute unit tests
-      run: dotnet test
+      run: dotnet test ${{ env.Solution_Name }} -c ${{ matrix.configuration }}
 
     # Restore the application to populate the obj folder with RuntimeIdentifiers
     - name: Publish the application
-      run: dotnet publish -c ${{ matrix.configuration }} -o publish-${{ matrix.configuration }} -p:DebugType=none
+      run: dotnet publish ${{ env.Solution_Name }} -c ${{ matrix.configuration }} -o publish-${{ matrix.configuration }} -p:DebugType=none
       env:
         Configuration: ${{ matrix.configuration }}
 
